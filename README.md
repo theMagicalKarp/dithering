@@ -66,13 +66,13 @@ $ act push
 
 ## Examples
 
-| Original                                            | Dithered                                                  |
-| --------------------------------------------------- | --------------------------------------------------------- |
-| ![american_gothic](examples/american_gothic/in.jpg) | ![american_gothic_dith](examples/american_gothic/out.jpg) |
-| ![baby](examples/baby/in.png)                       | ![baby_dith](examples/baby/out.png)                       |
-| ![milkyway](examples/milkyway/in.png)               | ![milkyway_dith](examples/milkyway/out.png)               |
-| ![gopher](examples/gopher/in.png)                   | ![gopher_dith](examples/gopher/out.png)                   |
-| ![michelangelo](examples/michelangelo/in.png)       | ![michelangelo_dith](examples/michelangelo/out.png)       |
+| Original                                                                       | Dithered                                                                             |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| <img src="examples/american_gothic/in.jpg" alt="american_gothic" width="240"/> | <img src="examples/american_gothic/out.jpg" alt="american_gothic_dith" width="240"/> |
+| <img src="examples/baby/in.png" alt="baby" width="290"/>                       | <img src="examples/baby/out.png" alt="baby_dith" width="290"/>                       |
+| <img src="examples/milkyway/in.png" alt="milkyway" width="350"/>               | <img src="examples/milkyway/out.png" alt="milkyway_dith" width="350"/>               |
+| <img src="examples/gopher/in.png" alt="gopher" width="350"/>                   | <img src="examples/gopher/out.png" alt="gopher_dith" width="350"/>                   |
+| <img src="examples/michelangelo/in.png" alt="michelangelo" width="350"/>       | <img src="examples/michelangelo/out.png" alt="michelangelo_dith" width="350"/>       |
 
 | Factor   | Image                                   |
 | -------- | --------------------------------------- |
