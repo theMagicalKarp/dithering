@@ -1,0 +1,15 @@
+linters:
+  disable:
+    # Should eventually address, aiming for basic MVP ATM :)
+    - varnamelen
+    - gomnd
+    - goerr113
+    - exhaustivestruct
+    - wsl
+    - wrapcheck
+    - forbidigo
+    - testpackage
+    - dupl
+    - lll
+    - cyclop
+    - funlen
