@@ -14,4 +14,3 @@ linters:
     - depguard
     - err113
     - exhaustruct
-    - testifylint
