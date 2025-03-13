@@ -12,11 +12,12 @@ func quantize(value, factor int) (int, int) {
 
 func ApplyDither(grayScale [][]int, factor int) {
 	var quantErr int
+
 	width := len(grayScale)
 	height := len(grayScale[0])
 
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
+	for y := range height {
+		for x := range width {
 			grayScale[x][y], quantErr = quantize(grayScale[x][y], factor)
 
 			if x+1 >= width || y+1 >= height || x == 0 {
