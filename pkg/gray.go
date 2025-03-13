@@ -23,7 +23,7 @@ type WritableImage interface {
 
 func NewGreyScale(bounds image.Rectangle) [][]int {
 	grayscale := make([][]int, bounds.Max.X)
-	for i := 0; i < bounds.Max.X; i++ {
+	for i := range bounds.Max.X {
 		grayscale[i] = make([]int, bounds.Max.Y)
 	}
 
@@ -32,8 +32,8 @@ func NewGreyScale(bounds image.Rectangle) [][]int {
 
 func ReadGreyScale(src ReadableImage, dst [][]int) {
 	bounds := src.Bounds()
-	for x := 0; x < bounds.Max.X; x++ {
-		for y := 0; y < bounds.Max.Y; y++ {
+	for x := range bounds.Max.X {
+		for y := range bounds.Max.Y {
 			dst[x][y] = toGray(src.At(x, y))
 		}
 	}
@@ -41,9 +41,9 @@ func ReadGreyScale(src ReadableImage, dst [][]int) {
 
 func WriteGrayScale(src [][]int, dst WritableImage) {
 	bounds := dst.Bounds()
-	for x := 0; x < bounds.Max.X; x++ {
-		for y := 0; y < bounds.Max.Y; y++ {
-			dst.Set(x, y, color.Gray{intToUInt8(src[x][y])})
+	for x := range bounds.Max.X {
+		for y := range bounds.Max.Y {
+			dst.Set(x, y, color.Gray{IntToUInt8(src[x][y])})
 		}
 	}
 }

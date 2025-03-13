@@ -1,9 +1,10 @@
-package pkg
+package pkg_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/theMagicalKarp/dithering/pkg"
 )
 
 func TestApplyBasicDither(t *testing.T) {
@@ -27,7 +28,7 @@ func TestApplyBasicDither(t *testing.T) {
 		},
 	}
 
-	ApplyDither(img, 1)
+	pkg.ApplyDither(img, 1)
 
 	expected := [][]int{
 		{
@@ -71,7 +72,7 @@ func TestApplyBasicDitherWithFactor(t *testing.T) {
 		},
 	}
 
-	ApplyDither(img, 3)
+	pkg.ApplyDither(img, 3)
 
 	expected := [][]int{
 		{

@@ -1,15 +1,17 @@
 linters:
+  enable-all: true
   disable:
     # Should eventually address, aiming for basic MVP ATM :)
     - varnamelen
-    - gomnd
-    - goerr113
-    - exhaustivestruct
-    - wsl
     - wrapcheck
     - forbidigo
-    - testpackage
     - dupl
     - lll
     - cyclop
     - funlen
+    - mnd
+    - gosec
+    - depguard
+    - err113
+    - exhaustruct
+    - testifylint

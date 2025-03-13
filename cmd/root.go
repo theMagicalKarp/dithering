@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"image"
 	"os"
@@ -9,34 +10,35 @@ import (
 	"github.com/theMagicalKarp/dithering/pkg"
 )
 
-func RunE(cmd *cobra.Command, args []string) error {
+func RunE(cmd *cobra.Command, _ []string) error {
 	inFileName, err := cmd.Flags().GetString("in")
 	if err != nil {
-		return fmt.Errorf("Failed to read 'in' flag: %w", err)
+		return fmt.Errorf("failed to read 'in' flag: %w", err)
 	}
 
 	outFileName, err := cmd.Flags().GetString("out")
 	if err != nil {
-		return fmt.Errorf("Failed to read 'out' flag: %w", err)
+		return fmt.Errorf("failed to read 'out' flag: %w", err)
 	}
 
 	if inFileName == "" || outFileName == "" {
-		return fmt.Errorf("Please specify input/output files")
+		return errors.New("please specify input/output files")
 	}
 
 	factor, err := cmd.Flags().GetInt("factor")
 	if err != nil {
-		return fmt.Errorf("Failed to read 'factor' flag: %w", err)
+		return fmt.Errorf("failed to read 'factor' flag: %w", err)
 	}
 
 	if factor < 0 || factor > 255 {
-		return fmt.Errorf("Factor must be any value between 1-255")
+		return errors.New("factor must be any value between 1-255")
 	}
 
 	validOutEncodings := pkg.GetSupportedEncodings()
+
 	outFormat, err := cmd.Flags().GetString("out-format")
 	if err != nil {
-		return fmt.Errorf("Failed to read 'out-format' flag: %w", err)
+		return fmt.Errorf("failed to read 'out-format' flag: %w", err)
 	}
 
 	encodeFunc, ok := validOutEncodings[outFormat]
@@ -46,30 +48,31 @@ func RunE(cmd *cobra.Command, args []string) error {
 
 	inFile, err := os.Open(inFileName)
 	if err != nil {
-		return fmt.Errorf("Failed to read 'in' file: %w", err)
+		return fmt.Errorf("failed to read 'in' file: %w", err)
 	}
 	defer inFile.Close()
 
 	inImg, _, err := image.Decode(inFile)
 	if err != nil {
-		return fmt.Errorf("Failed to decode 'in' file: %w", err)
+		return fmt.Errorf("failed to decode 'in' file: %w", err)
 	}
 
 	grayScale := pkg.NewGreyScale(inImg.Bounds())
 	pkg.ReadGreyScale(inImg, grayScale)
 	pkg.ApplyDither(grayScale, factor)
+
 	outImg := image.NewNRGBA(inImg.Bounds())
 	pkg.WriteGrayScale(grayScale, outImg)
 
 	outFile, err := os.Create(outFileName)
 	if err != nil {
-		return fmt.Errorf("Failed to open 'out' file: %w", err)
+		return fmt.Errorf("failed to open 'out' file: %w", err)
 	}
 	defer outFile.Close()
 
 	err = encodeFunc(outFile, outImg)
 	if err != nil {
-		return fmt.Errorf("Failed to encode 'out' file: %w", err)
+		return fmt.Errorf("failed to encode 'out' file: %w", err)
 	}
 
 	return nil
