@@ -207,10 +207,10 @@ func TestWriteGrayScale(t *testing.T) {
 	for x := range bounds.Max.X {
 		for y := range bounds.Max.Y {
 			r, g, b, a := dst.At(x, y).RGBA()
-			assert.Equal(t, uint32(src[x][y])*257, r)
-			assert.Equal(t, uint32(src[x][y])*257, g)
-			assert.Equal(t, uint32(src[x][y])*257, b)
-			assert.Equal(t, uint32(65535), a)
+			assert.EqualValues(t, src[x][y]*257, r)
+			assert.EqualValues(t, src[x][y]*257, g)
+			assert.EqualValues(t, src[x][y]*257, b)
+			assert.EqualValues(t, 65535, a)
 		}
 	}
 }
