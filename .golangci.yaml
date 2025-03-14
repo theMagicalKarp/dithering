@@ -10,7 +10,7 @@ linters:
     - cyclop
     - funlen
     - mnd
-    - gosec
     - depguard
     - err113
     - exhaustruct
+    - tenv
