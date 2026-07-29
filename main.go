@@ -1,3 +1,4 @@
+// Package main is the entry point for the dither command line tool.
 package main
 
 import (
@@ -8,8 +9,12 @@ import (
 )
 
 func main() {
-	if err := cmd.Execute(); err != nil {
-		fmt.Println(err)
+	err := cmd.Execute()
+	if err != nil {
+		// Diagnostics belong on stderr so that they stay out of a redirected
+		// or piped stdout. Nothing useful is left to do if the write fails.
+		_, _ = fmt.Fprintln(os.Stderr, err)
+
 		os.Exit(1)
 	}
 }

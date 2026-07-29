@@ -14,3 +14,7 @@
 # Dependency directories (remove the comment below to include it)
 .DS_Store
 build
+
+# Local mise overrides
+mise.local.toml
+.mise.local.toml

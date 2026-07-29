@@ -1,16 +1,157 @@
+version: "2"
+
 linters:
-  enable-all: true
-  disable:
-    # Should eventually address, aiming for basic MVP ATM :)
-    - varnamelen
-    - wrapcheck
-    - forbidigo
-    - dupl
-    - lll
+  enable:
+    - arangolint
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - canonicalheader
+    - clickhouselint
+    - containedctx
+    - contextcheck
+    - copyloopvar
     - cyclop
-    - funlen
-    - mnd
+    - decorder
     - depguard
+    - dogsled
+    - dupl
+    - dupword
+    - durationcheck
+    - embeddedstructfieldcheck
     - err113
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
     - exhaustruct
-    - tenv
+    - exptostd
+    - fatcontext
+    - forbidigo
+    - forcetypeassert
+    - funcorder
+    - funlen
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gochecknoinits
+    - gochecksumtype
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godoclint
+    - godot
+    - godox
+    - goheader
+    - gomoddirectives
+    - gomodguard_v2
+    - goprintffuncname
+    - gosec
+    - gosmopolitan
+    - govet
+    - grouper
+    - iface
+    - importas
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    - intrange
+    - iotamixing
+    - ireturn
+    - lll
+    - loggercheck
+    - maintidx
+    - makezero
+    - mirror
+    - misspell
+    - mnd
+    - modernize
+    - musttag
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnesserr
+    - nilnil
+    - nlreturn
+    - noctx
+    - noinlineerr
+    - nolintlint
+    - nonamedreturns
+    - nosprintfhostport
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - promlinter
+    - protogetter
+    - reassign
+    - recvcheck
+    - revive
+    - rowserrcheck
+    - sloglint
+    - spancheck
+    - sqlclosecheck
+    - staticcheck
+    - tagalign
+    - tagliatelle
+    - testableexamples
+    - testifylint
+    - testpackage
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - unqueryvet
+    - unused
+    - usestdlibvars
+    - usetesting
+    - varnamelen
+    - wastedassign
+    - whitespace
+    - wrapcheck
+    - wsl_v5
+    - zerologlint
+
+  # Test code used to need its own exclusions (`dupl`, `funlen`, `lll`) because
+  # the grayscale fixtures were enormous inline pixel literals and base64
+  # blobs. Those fixtures now live in `pkg/testdata` as PNG files, so the tests
+  # pass the same linters as the package itself.
+
+  settings:
+    depguard:
+      rules:
+        main:
+          allow:
+            - $gostd
+            - github.com/theMagicalKarp/dithering/cmd
+            - github.com/theMagicalKarp/dithering/pkg
+            - github.com/spf13/cobra
+            - github.com/stretchr/testify/assert
+            - github.com/stretchr/testify/require
+
+    varnamelen:
+      ignore-names:
+        - a
+        - b
+        - c
+        - g
+        - h
+        - m
+        - r
+        - w
+        - x
+        - y
+
+formatters:
+  # `golines` is deliberately left out. The grayscale tests are generated
+  # fixtures — 60-element rows of expected pixel values — and golines rewrites
+  # each row into one integer per line, which is both unreadable and enormous.
+  # `lll` already catches over-long lines in hand-written code.
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
