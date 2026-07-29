@@ -33,12 +33,20 @@ A version of this algorithm can be seen in [pkg/dithering.go].
 
 ## Requirements
 
-- [Go 1.18]
+- [mise]
+
+Toolchain versions are managed with [mise]. Once mise is installed, run the
+following from the repository root to get the pinned Go and golangci-lint
+versions:
+
+```console
+$ mise install
+```
 
 ## Bulid
 
 ```console
-$ make build
+$ mise run build
 ```
 
 ## Run
@@ -46,22 +54,16 @@ $ make build
 ```console
 $ ./build/dither -h
 $ ./build/dither --in foo.png --out bar.png
-$ make examples
+$ mise run examples
 ```
 
 ## Test
 
 ```console
-$ make test
-$ make lint # requires golangci-lint installed
-```
-
-## Verify CI Locally
-
-Install [act] on your machine. <sup>This runs GitHub workflows locally.</sup>
-
-```console
-$ act push
+$ mise run test   # go test ./...
+$ mise run lint   # golangci-lint run ./...
+$ mise run fmt    # golangci-lint fmt ./...
+$ mise run check  # build + test + lint
 ```
 
 ## Examples
@@ -82,7 +84,6 @@ $ act push
 | 3        | ![factor_3](examples/factors/out_3.png) |
 | 4        | ![factor_4](examples/factors/out_4.png) |
 
-[Go 1.18]: https://go.dev/
+[mise]: https://mise.jdx.dev/
 [Floyd–Steinberg dithering]: https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering
-[act]: https://github.com/nektos/act
 [pkg/dithering.go]: pkg/dithering.go
